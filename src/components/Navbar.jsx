@@ -14,11 +14,11 @@ function MainNavbar() {
   const cartItemCount = null;
 
   return (
-    <nav className='bg-white shadow-md py-4 px-16'>
+    <nav className='bg-white shadow-md py-1'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
         
         {/* Desktop View */}
-        <div className='hidden md:flex items-center justify-between'>
+        <div className='hidden md:flex items-start justify-start'>
           {/* Left Section: Logo */}
           <div className='flex items-center space-x-2'>
             <a href="#" className="flex items-center space-x-2">
@@ -86,16 +86,14 @@ function MainNavbar() {
         <div className='md:hidden'>
           {/* Top Row: Menu, Logo, Cart, Profile */}
           <div className='flex items-center justify-between mb-3'>
-            <button className='p-2' aria-label="Menu">
-              <Menu size={24} className="text-gray-700" />
-            </button>
-            
-            <a href="/" className="flex items-center space-x-2">
-              <div className="bg-blue-500 p-1.5 rounded">
-                <ShoppingBag size={20} className="text-white" />
-              </div>
-              <span className="text-xl font-bold text-blue-500">Brand</span>
-            </a>
+            <div className='flex items-center space-x-2'>
+              <button className='p-2' aria-label="Menu">
+                <Menu size={24} className="text-gray-700" />
+              </button>
+              <a href="/" className="flex items-center space-x-2">
+                <img src={logo} alt="Brand Logo" className="h-8 w-24" />
+              </a>
+            </div>
 
             <div className='flex items-center space-x-3'>
               <a href="/cart" className='relative' aria-label="Shopping Cart">

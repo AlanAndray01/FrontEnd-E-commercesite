@@ -47,7 +47,7 @@ const Hero = () => {
                 <div className="relative bg-teal-50 sm:rounded-lg overflow-hidden h-[240px] lg:h-[420px]">
                     <img
                         className="h-full w-full object-cover" // Added object-cover
-                        src="src\assets\Image\backgrounds\Banner-board-800x420-2.png" // Assuming this is your teal banner image
+                        src="https://i.postimg.cc/gJD5RxyB/Banner-board-800x420-2.png" // Assuming this is your teal banner image
                         alt="banner"
                     />
 

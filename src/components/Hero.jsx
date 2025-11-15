@@ -53,7 +53,7 @@ const Hero = () => {
 
                     {/* Content Overlay - Responsive padding and text size */}
                     <div className="absolute inset-0 flex  flex-col justify-start items-start p-6 lg:p-10">
-                        <h2 className="text-2xl lg:text-4xl .mb-4 text-black">
+                        <h2 className="text-2xl lg:text-4xl .mb-4 text-black mt-4">
                             Latest trending <br /> <strong>Electronic items</strong>
                         </h2>
                         <button className="bg-white text-blue-500 font-semibold my-8 px-6 py-2 rounded-lg shadow hover:bg-gray-100 transition">

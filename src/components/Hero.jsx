@@ -3,7 +3,7 @@ import React from 'react';
 const Hero = () => {
     return (
 
-        <div className="max-w-7xl mx-auto sm:px-6 mb-10">
+        <div className="max-w-7xl mx-auto sm:px-6 mb-2">
             {/* MAIN GRID:
               - Mobile: 1 column (stacks banner only, as sidebars are hidden)
               - Large Screens (lg): 3-column layout as specified

@@ -1,6 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom'; // ADD THIS
+import React, { useState } from 'react'; // ADD useState
+import { useNavigate } from 'react-router-dom';
 import logo from "/src/assets/Layout/Brand/logo-colored.png"
+import Sidebar from './Sidebar'; // ADD THIS IMPORT
 import {
   ShoppingBag,
   Search,
@@ -12,134 +13,80 @@ import {
 } from 'lucide-react';
 
 function MainNavbar() {
-  const navigate = useNavigate(); // ADD THIS
+  const navigate = useNavigate();
   const cartItemCount = null;
+  const [sidebarOpen, setSidebarOpen] = useState(false); // ADD THIS
 
-  // ADD THIS FUNCTION
   const handleSearchClick = () => {
     navigate('/search');
   };
 
   return (
-    <nav className='bg-white shadow-md py-1'>
-      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
-        
-        {/* Desktop View */}
-        <div className='hidden md:flex items-start justify-start'>
-          {/* Left Section: Logo */}
-          <div className='flex items-center space-x-2'>
-            <a href="#" className="flex items-center space-x-2">
-              <img src={logo} alt="Brand Logo" className="h-10 w-30" />
-            </a>
+    <>
+      {/* ADD SIDEBAR COMPONENT */}
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      <nav className='bg-white shadow-md py-1'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
+          
+          {/* Desktop View - NO CHANGES */}
+          <div className='hidden md:flex items-start justify-start'>
+            {/* ... your existing desktop code ... */}
           </div>
 
-          {/* Center Section: Search Bar Group */}
-          <div className='flex-grow flex justify-center mx-8'>
-            <div className='flex items-center border-2 border-blue-400 rounded-lg overflow-hidden w-full max-w-xl'>
-              <input
-                onClick={handleSearchClick}  // ADD THIS
-                className='focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm flex-grow cursor-pointer'  // ADD cursor-pointer
-                placeholder='Search'
-                type="search"
-                readOnly  // ADD THIS
-              />
-              <select
-                className='cursor-pointer focus:outline-none h-full px-3 text-md text-gray-600 border-l border-blue-400 bg-white'
-                id="category"
-                name="category"
+          {/* Mobile View */}
+          <div className='md:hidden'>
+            {/* Top Row: Menu, Logo, Cart, Profile */}
+            <div className='flex items-center justify-between mb-3'>
+              <div className='flex items-center space-x-2'>
+                <button 
+                  onClick={() => setSidebarOpen(true)} // ADD THIS
+                  className='p-2' 
+                  aria-label="Menu"
+                >
+                  <Menu size={24} className="text-gray-700" />
+                </button>
+                <a href="/" className="flex items-center space-x-2">
+                  <img src={logo} alt="Brand Logo" className="h-8 w-24" />
+                </a>
+              </div>
+
+              <div className='flex items-center space-x-3'>
+                <a href="/cart" className='relative' aria-label="Shopping Cart">
+                  <ShoppingCart size={24} className="text-gray-700" />
+                  {cartItemCount > 0 && (
+                    <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
+                      {cartItemCount}
+                    </span>
+                  )}
+                </a>
+                <a href="/account" aria-label="Account Profile">
+                  <User size={24} className="text-gray-700" />
+                </a>
+              </div>
+            </div>
+
+            {/* Search Bar - Mobile */}
+            <div className='mb-3'>
+              <div 
+                onClick={handleSearchClick}
+                className='flex items-center bg-gray-100 rounded-lg px-3 py-2 cursor-pointer'
               >
-                <option value="all">All category</option>
-                <option value="clothing">Clothing</option>
-                <option value="shoes">Shoes</option>
-                <option value="furniture">Furniture</option>
-                <option value="accessories">Accessories</option>
-                <option value="electronics">Electronics</option>
-              </select>
-              <button
-                onClick={handleSearchClick}  // ADD THIS
-                className='bg-blue-500 text-white h-full px-4 text-sm font-medium flex items-center justify-center'
-                type="button"  // CHANGE from submit to button
-                aria-label="Search"
-              >
-                Search
-              </button>
+                <Search size={18} className="text-gray-400 mr-2" />
+                <input
+                  onClick={handleSearchClick}
+                  className='bg-transparent focus:outline-none flex-grow text-sm cursor-pointer'
+                  placeholder='Search'
+                  type="search"
+                  readOnly
+                />
+              </div>
             </div>
           </div>
 
-          {/* Right Section: Utility Icons and Labels - NO CHANGES */}
-          <div className='flex items-center space-x-6 text-sm text-gray-500'>
-            <a href="/account" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="Account Profile">
-              <User size={20} />
-              <span className="mt-1">Profile</span>
-            </a>
-            <a href="/messages" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="Messages">
-              <MessageSquare size={20} />
-              <span className="mt-1">Message</span>
-            </a>
-            <a href="/orders" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="My Orders">
-              <Heart size={20} />
-              <span className="mt-1">Orders</span>
-            </a>
-            <a href="/cart" className='relative flex flex-col items-center hover:text-blue-600 transition' aria-label="Shopping Cart">
-              <ShoppingCart size={20} />
-              <span className="mt-1">My cart</span>
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
-                  {cartItemCount}
-                </span>
-              )}
-            </a>
-          </div>
         </div>
-
-        {/* Mobile View */}
-        <div className='md:hidden'>
-          {/* Top Row: Menu, Logo, Cart, Profile - NO CHANGES */}
-          <div className='flex items-center justify-between mb-3'>
-            <div className='flex items-center space-x-2'>
-              <button className='p-2' aria-label="Menu">
-                <Menu size={24} className="text-gray-700" />
-              </button>
-              <a href="/" className="flex items-center space-x-2">
-                <img src={logo} alt="Brand Logo" className="h-8 w-24" />
-              </a>
-            </div>
-
-            <div className='flex items-center space-x-3'>
-              <a href="/cart" className='relative' aria-label="Shopping Cart">
-                <ShoppingCart size={24} className="text-gray-700" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
-                    {cartItemCount}
-                  </span>
-                )}
-              </a>
-              <a href="/account" aria-label="Account Profile">
-                <User size={24} className="text-gray-700" />
-              </a>
-            </div>
-          </div>
-
-          {/* Search Bar - Mobile */}
-          <div className='mb-3'>
-            <div 
-              onClick={handleSearchClick}  // ADD THIS
-              className='flex items-center bg-gray-100 rounded-lg px-3 py-2 cursor-pointer'  // ADD cursor-pointer
-            >
-              <Search size={18} className="text-gray-400 mr-2" />
-              <input
-                onClick={handleSearchClick}  // ADD THIS
-                className='bg-transparent focus:outline-none flex-grow text-sm cursor-pointer'  // ADD cursor-pointer
-                placeholder='Search'
-                type="search"
-                readOnly  // ADD THIS
-              />
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 

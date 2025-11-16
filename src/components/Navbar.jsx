@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // ADD THIS
 import logo from "/src/assets/Layout/Brand/logo-colored.png"
 import {
   ShoppingBag,
@@ -11,7 +12,13 @@ import {
 } from 'lucide-react';
 
 function MainNavbar() {
+  const navigate = useNavigate(); // ADD THIS
   const cartItemCount = null;
+
+  // ADD THIS FUNCTION
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
 
   return (
     <nav className='bg-white shadow-md py-1'>
@@ -30,9 +37,11 @@ function MainNavbar() {
           <div className='flex-grow flex justify-center mx-8'>
             <div className='flex items-center border-2 border-blue-400 rounded-lg overflow-hidden w-full max-w-xl'>
               <input
-                className='focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm flex-grow'
+                onClick={handleSearchClick}  // ADD THIS
+                className='focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm flex-grow cursor-pointer'  // ADD cursor-pointer
                 placeholder='Search'
                 type="search"
+                readOnly  // ADD THIS
               />
               <select
                 className='cursor-pointer focus:outline-none h-full px-3 text-md text-gray-600 border-l border-blue-400 bg-white'
@@ -47,8 +56,9 @@ function MainNavbar() {
                 <option value="electronics">Electronics</option>
               </select>
               <button
+                onClick={handleSearchClick}  // ADD THIS
                 className='bg-blue-500 text-white h-full px-4 text-sm font-medium flex items-center justify-center'
-                type="submit"
+                type="button"  // CHANGE from submit to button
                 aria-label="Search"
               >
                 Search
@@ -56,7 +66,7 @@ function MainNavbar() {
             </div>
           </div>
 
-          {/* Right Section: Utility Icons and Labels */}
+          {/* Right Section: Utility Icons and Labels - NO CHANGES */}
           <div className='flex items-center space-x-6 text-sm text-gray-500'>
             <a href="/account" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="Account Profile">
               <User size={20} />
@@ -84,7 +94,7 @@ function MainNavbar() {
 
         {/* Mobile View */}
         <div className='md:hidden'>
-          {/* Top Row: Menu, Logo, Cart, Profile */}
+          {/* Top Row: Menu, Logo, Cart, Profile - NO CHANGES */}
           <div className='flex items-center justify-between mb-3'>
             <div className='flex items-center space-x-2'>
               <button className='p-2' aria-label="Menu">
@@ -110,14 +120,19 @@ function MainNavbar() {
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Search Bar - Mobile */}
           <div className='mb-3'>
-            <div className='flex items-center bg-gray-100 rounded-lg px-3 py-2'>
+            <div 
+              onClick={handleSearchClick}  // ADD THIS
+              className='flex items-center bg-gray-100 rounded-lg px-3 py-2 cursor-pointer'  // ADD cursor-pointer
+            >
               <Search size={18} className="text-gray-400 mr-2" />
               <input
-                className='bg-transparent focus:outline-none flex-grow text-sm'
+                onClick={handleSearchClick}  // ADD THIS
+                className='bg-transparent focus:outline-none flex-grow text-sm cursor-pointer'  // ADD cursor-pointer
                 placeholder='Search'
                 type="search"
+                readOnly  // ADD THIS
               />
             </div>
           </div>

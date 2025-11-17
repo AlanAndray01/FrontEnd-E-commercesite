@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function RecommendedItems() {
+const RecommendedItems = () => {
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+  
   const products = [
     {
       id: 1,
@@ -196,6 +203,7 @@ function RecommendedItems() {
             <div 
               key={product.id} 
               className="bg-white rounded-lg border border-gray-200 overflow-hidden hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => handleProductClick(product.id)}
             >
               {/* Product Image */}
               <div className="bg-gray-50 p-4 flex items-center justify-center h-48">
@@ -203,6 +211,9 @@ function RecommendedItems() {
                   src={product.image} 
                   alt={product.name}
                   className="w-full h-full object-contain"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/150x150/f3f4f6/6b7280?text=No+Image';
+                  }}
                 />
               </div>
               

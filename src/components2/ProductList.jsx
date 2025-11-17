@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function ProductList({ products = [], hasSearched = false }) {
+  const navigate = useNavigate();
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   // If no products found AND user has searched
   if ((!products || products.length === 0) && hasSearched) {
     return (
@@ -47,6 +54,7 @@ function ProductList({ products = [], hasSearched = false }) {
           <div 
             key={product.id} 
             className="bg-white rounded-lg border border-gray-200 p-3 flex space-x-3 hover:shadow-md transition-shadow cursor-pointer"
+            onClick={() => handleProductClick(product.id)}
           >
             {/* Product Image */}
             <div className="flex-shrink-0">
@@ -54,6 +62,9 @@ function ProductList({ products = [], hasSearched = false }) {
                 src={product.image}
                 alt={product.name}
                 className="w-20 h-20 object-cover rounded border border-gray-100"
+                onError={(e) => {
+                  e.target.src = 'https://via.placeholder.com/80x80/f3f4f6/6b7280?text=No+Image';
+                }}
               />
             </div>
 

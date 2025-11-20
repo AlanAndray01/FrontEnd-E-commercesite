@@ -21,6 +21,10 @@ function MainNavbar() {
     navigate('/search');
   };
 
+  const handleCartClick = () => {
+    navigate('/cart');
+  };
+
   return (
     <>
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -84,7 +88,11 @@ function MainNavbar() {
                 <Heart size={20} />
                 <span className="mt-1">Orders</span>
               </a>
-              <a href="/cart" className='relative flex flex-col items-center hover:text-blue-600 transition' aria-label="Shopping Cart">
+              <button 
+                onClick={handleCartClick}
+                className='relative flex flex-col items-center hover:text-blue-600 transition' 
+                aria-label="Shopping Cart"
+              >
                 <ShoppingCart size={20} />
                 <span className="mt-1">My cart</span>
                 {cartItemCount > 0 && (
@@ -92,7 +100,7 @@ function MainNavbar() {
                     {cartItemCount}
                   </span>
                 )}
-              </a>
+              </button>
             </div>
           </div>
 
@@ -114,14 +122,18 @@ function MainNavbar() {
               </div>
 
               <div className='flex items-center space-x-3'>
-                <a href="/cart" className='relative' aria-label="Shopping Cart">
+                <button 
+                  onClick={handleCartClick}
+                  className='relative' 
+                  aria-label="Shopping Cart"
+                >
                   <ShoppingCart size={24} className="text-gray-700" />
                   {cartItemCount > 0 && (
                     <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
                       {cartItemCount}
                     </span>
                   )}
-                </a>
+                </button>
                 <a href="/account" aria-label="Account Profile">
                   <User size={24} className="text-gray-700" />
                 </a>

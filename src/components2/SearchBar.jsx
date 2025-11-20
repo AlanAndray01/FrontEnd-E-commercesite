@@ -1,10 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom'; // ADD THIS
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, User, Search } from 'lucide-react';
 import { categories } from './mockData';
 
 function SearchBar({ searchQuery, onSearchChange, selectedCategory, onCategoryChange }) {
-  const navigate = useNavigate(); // ADD THIS
+  const navigate = useNavigate();
+
+  const handleCartClick = () => {
+    navigate('/cart');
+  };
 
   return (
     <header className="bg-white border-b sticky top-0 z-10">
@@ -12,7 +16,7 @@ function SearchBar({ searchQuery, onSearchChange, selectedCategory, onCategoryCh
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">
           <button 
-            onClick={() => navigate('/')}  // ADD THIS - Navigate back to homepage
+            onClick={() => navigate('/')}
             className="p-2 hover:bg-gray-100 rounded-full transition"
           >
             <ArrowLeft size={24} className="text-gray-700" />
@@ -21,7 +25,10 @@ function SearchBar({ searchQuery, onSearchChange, selectedCategory, onCategoryCh
         </div>
         
         <div className="flex items-center space-x-2">
-          <button className="p-2 hover:bg-gray-100 rounded-full transition">
+          <button 
+            onClick={handleCartClick}
+            className="p-2 hover:bg-gray-100 rounded-full transition"
+          >
             <ShoppingCart size={24} className="text-gray-700" />
           </button>
           <button className="p-2 hover:bg-gray-100 rounded-full transition">

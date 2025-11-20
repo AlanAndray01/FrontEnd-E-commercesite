@@ -1,7 +1,7 @@
 import React from 'react';
 import { SlidersHorizontal, X, Filter, Grid2x2, Menu } from 'lucide-react';
 
-function FilterArea({ sortBy, onSortChange, activeFilters, onFilterRemove, onFilterAdd }) {
+function FilterArea({ sortBy, onSortChange, activeFilters, onFilterRemove, }) {
   const handleSortClick = () => {
     if (sortBy === 'Newest') onSortChange('Price Low');
     else if (sortBy === 'Price Low') onSortChange('Price High');

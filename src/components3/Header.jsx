@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom'
 const Header = () => {
     const navigate = useNavigate()
 
+    const handleCartClick = () => {
+    navigate('/cart');
+  };
+    
     const handleBackClick = () => {
         // Go back to previous page or home if no history
         navigate(-1) // This goes back to previous page
@@ -24,9 +28,9 @@ const Header = () => {
                 </button>
                 <div className="flex items-center gap-4">
                     <button 
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                        aria-label="Shopping cart"
-                    >
+            onClick={handleCartClick}
+            className="p-2 hover:bg-gray-100 rounded-full transition"
+          >
                         <ShoppingCart className="w-5 h-5" />
                     </button>
                     <button 

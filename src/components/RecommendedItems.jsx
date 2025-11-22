@@ -192,7 +192,7 @@ const RecommendedItems = () => {
   ];
 
   return (
-    <div className="bg-gray-50 py-8">
+    <div className="lg:px-14 lg:py-2">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <h2 className="text-2xl font-semibold text-gray-900 mb-6">Recommended items</h2>

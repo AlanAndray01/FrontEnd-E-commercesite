@@ -29,8 +29,8 @@ function MainNavbar() {
     <>
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <nav className='bg-white shadow-md py-1'>
-        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 '>
+      <nav className='bg-white shadow-md py-1 border border-gray-200'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 '>
           
           {/* Desktop View */}
           <div className='hidden md:flex mt-2 items-start justify-start'>

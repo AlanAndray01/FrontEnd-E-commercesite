@@ -1,360 +1,500 @@
-
-// import React, { useState, useEffect, useRef } from 'react'; 
-import React from 'react';
+// ...existing code...
+import React, { useEffect, useRef, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
-import {
-  Menu,
-  ChevronDown,
-  Globe,
-} from 'lucide-react';
+import { Menu, ChevronDown, ChevronUp } from "lucide-react";
 
-function SubNav() {
-  // -----------------------------------------------------
-  // 2. ADD COMPONENT LOGIC (Inside SubNav function)
-  // -----------------------------------------------------
-  // --- Country Data (Using Emojis as flag image placeholders) ---
-// const countries = [
-//   { name: 'Afghanistan', code: 'AF' },
-//   { name: 'Albania', code: 'AL' },
-//   { name: 'Algeria', code: 'DZ' },
-//   { name: 'Andorra', code: 'AD' },
-//   { name: 'Angola', code: 'AO' },
-//   { name: 'Antigua and Barbuda', code: 'AG' },
-//   { name: 'Argentina', code: 'AR' },
-//   { name: 'Armenia', code: 'AM' },
-//   { name: 'Australia', code: 'AU' },
-//   { name: 'Austria', code: 'AT' },
-//   { name: 'Azerbaijan', code: 'AZ' },
-//   { name: 'Bahamas', code: 'BS' },
-//   { name: 'Bahrain', code: 'BH' },
-//   { name: 'Bangladesh', code: 'BD' },
-//   { name: 'Barbados', code: 'BB' },
-//   { name: 'Belarus', code: 'BY' },
-//   { name: 'Belgium', code: 'BE' },
-//   { name: 'Belize', code: 'BZ' },
-//   { name: 'Benin', code: 'BJ' },
-//   { name: 'Bhutan', code: 'BT' },
-//   { name: 'Bolivia (Plurinational State of)', code: 'BO' },
-//   { name: 'Bosnia and Herzegovina', code: 'BA' },
-//   { name: 'Botswana', code: 'BW' },
-//   { name: 'Brazil', code: 'BR' },
-//   { name: 'Brunei Darussalam', code: 'BN' },
-//   { name: 'Bulgaria', code: 'BG' },
-//   { name: 'Burkina Faso', code: 'BF' },
-//   { name: 'Burundi', code: 'BI' },
-//   { name: 'Cabo Verde', code: 'CV' },
-//   { name: 'Cambodia', code: 'KH' },
-//   { name: 'Cameroon', code: 'CM' },
-//   { name: 'Canada', code: 'CA' },
-//   { name: 'Central African Republic', code: 'CF' },
-//   { name: 'Chad', code: 'TD' },
-//   { name: 'Chile', code: 'CL' },
-//   { name: 'China', code: 'CN' },
-//   { name: 'Colombia', code: 'CO' },
-//   { name: 'Comoros', code: 'KM' },
-//   { name: 'Congo (the Democratic Republic of the)', code: 'CD' },
-//   { name: 'Congo (the)', code: 'CG' },
-//   { name: 'Costa Rica', code: 'CR' },
-//   { name: 'Côte d’Ivoire', code: 'CI' },
-//   { name: 'Croatia', code: 'HR' },
-//   { name: 'Cuba', code: 'CU' },
-//   { name: 'Cyprus', code: 'CY' },
-//   { name: 'Czech Republic', code: 'CZ' },
-//   { name: 'Denmark', code: 'DK' },
-//   { name: 'Djibouti', code: 'DJ' },
-//   { name: 'Dominica', code: 'DM' },
-//   { name: 'Dominican Republic', code: 'DO' },
-//   { name: 'Ecuador', code: 'EC' },
-//   { name: 'Egypt', code: 'EG' },
-//   { name: 'El Salvador', code: 'SV' },
-//   { name: 'Equatorial Guinea', code: 'GQ' },
-//   { name: 'Eritrea', code: 'ER' },
-//   { name: 'Estonia', code: 'EE' },
-//   { name: 'Eswatini', code: 'SZ' },
-//   { name: 'Ethiopia', code: 'ET' },
-//   { name: 'Fiji', code: 'FJ' },
-//   { name: 'Finland', code: 'FI' },
-//   { name: 'France', code: 'FR' },
-//   { name: 'Gabon', code: 'GA' },
-//   { name: 'Gambia', code: 'GM' },
-//   { name: 'Georgia', code: 'GE' },
-//   { name: 'Germany', code: 'DE' },
-//   { name: 'Ghana', code: 'GH' },
-//   { name: 'Greece', code: 'GR' },
-//   { name: 'Grenada', code: 'GD' },
-//   { name: 'Guatemala', code: 'GT' },
-//   { name: 'Guinea', code: 'GN' },
-//   { name: 'Guinea-Bissau', code: 'GW' },
-//   { name: 'Guyana', code: 'GY' },
-//   { name: 'Haiti', code: 'HT' },
-//   { name: 'Honduras', code: 'HN' },
-//   { name: 'Hungary', code: 'HU' },
-//   { name: 'Iceland', code: 'IS' },
-//   { name: 'India', code: 'IN' },
-//   { name: 'Indonesia', code: 'ID' },
-//   { name: 'Iran (Islamic Republic of)', code: 'IR' },
-//   { name: 'Iraq', code: 'IQ' },
-//   { name: 'Ireland', code: 'IE' },
-//   { name: 'Israel', code: 'IL' },
-//   { name: 'Italy', code: 'IT' },
-//   { name: 'Jamaica', code: 'JM' },
-//   { name: 'Japan', code: 'JP' },
-//   { name: 'Jordan', code: 'JO' },
-//   { name: 'Kazakhstan', code: 'KZ' },
-//   { name: 'Kenya', code: 'KE' },
-//   { name: 'Kiribati', code: 'KI' },
-//   { name: 'Korea (the Republic of)', code: 'KR' },
-//   { name: 'Kuwait', code: 'KW' },
-//   { name: 'Kyrgyzstan', code: 'KG' },
-//   { name: 'Lao People’s Democratic Republic', code: 'LA' },
-//   { name: 'Latvia', code: 'LV' },
-//   { name: 'Lebanon', code: 'LB' },
-//   { name: 'Lesotho', code: 'LS' },
-//   { name: 'Liberia', code: 'LR' },
-//   { name: 'Libya', code: 'LY' },
-//   { name: 'Liechtenstein', code: 'LI' },
-//   { name: 'Lithuania', code: 'LT' },
-//   { name: 'Luxembourg', code: 'LU' },
-//   { name: 'Madagascar', code: 'MG' },
-//   { name: 'Malawi', code: 'MW' },
-//   { name: 'Malaysia', code: 'MY' },
-//   { name: 'Maldives', code: 'MV' },
-//   { name: 'Mali', code: 'ML' },
-//   { name: 'Malta', code: 'MT' },
-//   { name: 'Marshall Islands', code: 'MH' },
-//   { name: 'Mauritania', code: 'MR' },
-//   { name: 'Mauritius', code: 'MU' },
-//   { name: 'Mexico', code: 'MX' },
-//   { name: 'Micronesia (Federated States of)', code: 'FM' },
-//   { name: 'Moldova (the Republic of)', code: 'MD' },
-//   { name: 'Monaco', code: 'MC' },
-//   { name: 'Mongolia', code: 'MN' },
-//   { name: 'Montenegro', code: 'ME' },
-//   { name: 'Morocco', code: 'MA' },
-//   { name: 'Mozambique', code: 'MZ' },
-//   { name: 'Myanmar', code: 'MM' },
-//   { name: 'Namibia', code: 'NA' },
-//   { name: 'Nauru', code: 'NR' },
-//   { name: 'Nepal', code: 'NP' },
-//   { name: 'Netherlands', code: 'NL' },
-//   { name: 'New Zealand', code: 'NZ' },
-//   { name: 'Nicaragua', code: 'NI' },
-//   { name: 'Niger', code: 'NE' },
-//   { name: 'Nigeria', code: 'NG' },
-//   { name: 'North Macedonia', code: 'MK' },
-//   { name: 'Norway', code: 'NO' },
-//   { name: 'Oman', code: 'OM' },
-//   { name: 'Pakistan', code: 'PK' },
-//   { name: 'Palau', code: 'PW' },
-//   { name: 'Panama', code: 'PA' },
-//   { name: 'Papua New Guinea', code: 'PG' },
-//   { name: 'Paraguay', code: 'PY' },
-//   { name: 'Peru', code: 'PE' },
-//   { name: 'Philippines', code: 'PH' },
-//   { name: 'Poland', code: 'PL' },
-//   { name: 'Portugal', code: 'PT' },
-//   { name: 'Qatar', code: 'QA' },
-//   { name: 'Republic of Korea', code: 'KR' },
-//   { name: 'Romania', code: 'RO' },
-//   { name: 'Russian Federation', code: 'RU' },
-//   { name: 'Rwanda', code: 'RW' },
-//   { name: 'Saint Kitts and Nevis', code: 'KN' },
-//   { name: 'Saint Lucia', code: 'LC' },
-//   { name: 'Saint Vincent and the Grenadines', code: 'VC' },
-//   { name: 'Samoa', code: 'WS' },
-//   { name: 'San Marino', code: 'SM' },
-//   { name: 'Sao Tome and Principe', code: 'ST' },
-//   { name: 'Saudi Arabia', code: 'SA' },
-//   { name: 'Senegal', code: 'SN' },
-//   { name: 'Serbia', code: 'RS' },
-//   { name: 'Seychelles', code: 'SC' },
-//   { name: 'Sierra Leone', code: 'SL' },
-//   { name: 'Singapore', code: 'SG' },
-//   { name: 'Slovakia', code: 'SK' },
-//   { name: 'Slovenia', code: 'SI' },
-//   { name: 'Solomon Islands', code: 'SB' },
-//   { name: 'Somalia', code: 'SO' },
-//   { name: 'South Africa', code: 'ZA' },
-//   { name: 'South Sudan', code: 'SS' },
-//   { name: 'Spain', code: 'ES' },
-//   { name: 'Sri Lanka', code: 'LK' },
-//   { name: 'Sudan', code: 'SD' },
-//   { name: 'Suriname', code: 'SR' },
-//   { name: 'Sweden', code: 'SE' },
-//   { name: 'Switzerland', code: 'CH' },
-//   { name: 'Syrian Arab Republic', code: 'SY' },
-//   { name: 'Tajikistan', code: 'TJ' },
-//   { name: 'Tanzania, United Republic of', code: 'TZ' },
-//   { name: 'Thailand', code: 'TH' },
-//   { name: 'Timor-Leste', code: 'TL' },
-//   { name: 'Togo', code: 'TG' },
-//   { name: 'Tonga', code: 'TO' },
-//   { name: 'Trinidad and Tobago', code: 'TT' },
-//   { name: 'Tunisia', code: 'TN' },
-//   { name: 'Türkiye', code: 'TR' },
-//   { name: 'Tuvalu', code: 'TV' },
-//   { name: 'Uganda', code: 'UG' },
-//   { name: 'Ukraine', code: 'UA' },
-//   { name: 'United Arab Emirates', code: 'AE' },
-//   { name: 'United Kingdom of Great Britain and Northern Ireland', code: 'GB' },
-//   { name: 'United States of America', code: 'US' },
-//   { name: 'Uruguay', code: 'UY' },
-//   { name: 'Uzbekistan', code: 'UZ' },
-//   { name: 'Vanuatu', code: 'VU' },
-//   { name: 'Venezuela (Bolivarian Republic of)', code: 'VE' },
-//   { name: 'Viet Nam', code: 'VN' },
-//   { name: 'Yemen', code: 'YE' },
-//   { name: 'Zambia', code: 'ZM' },
-//   { name: 'Zimbabwe', code: 'ZW' }
-// ];
+/*
+  SubNav
+  - Per-link dropdowns with rotating chevrons (toggle down/up).
+  - Single open submenu at a time. Close on outside click / Escape.
+  - Language & Ship-to hidden on mobile/tablet (visible from lg).
+  - Desktop layout kept same as image (links appear after All category).
+*/
 
-  // const [selectedCountry, setSelectedCountry] = useState(countries[0]);
-  // const [isCountryDropdownOpen, setIsCountryDropdownOpen] = useState(false);
-  // const dropdownRef = useRef(null);
+const LINKS = [
+  { label: "Hot offers" },
+  {
+    label: "Gift boxes",
+    // children: [
+    //   { label: "For Her", href: "#" },
+    //   { label: "For Him", href: "#" },
+    //   { label: "Seasonal", href: "#" },
+    // ],
+  },
+  {
+    label: "Projects",
+    // children: [
+    //   { label: "New Projects", href: "#" },
+    //   { label: "Popular", href: "#" },
+    // ],
+  },
+  {
+    label: "Menu item",
+    // children: [
+    //   { label: "Submenu A", href: "#" },
+    //   { label: "Submenu B", href: "#" },
+    // ],
+  },
+  {
+    label: "Help",
+    children: [
+      { label: "Customer Service", href: "#" },
+      { label: "Returns", href: "#" },
+    ],
+  },
+];
 
-  // 3️⃣ Now useEffect can safely use countries
-  // useEffect(() => {
-  //   fetch("https://ipapi.co/json/")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const detected = countries.find((c) => c.code === data.country_code);
-  //       if (detected) setSelectedCountry(detected);
-  //     })
-  //     .catch((err) => console.warn("Geo-location failed:", err));
-  // }, ); // countries is constant, no need to put in dependency array
+// COUNTRIES (full list kept as in your file)
+const COUNTRIES = [
+  { code: "AF", name: "Afghanistan" },
+  { code: "AL", name: "Albania" },
+  { code: "DZ", name: "Algeria" },
+  { code: "AS", name: "American Samoa" },
+  { code: "AD", name: "Andorra" },
+  { code: "AO", name: "Angola" },
+  { code: "AI", name: "Anguilla" },
+  { code: "AQ", name: "Antarctica" },
+  { code: "AG", name: "Antigua and Barbuda" },
+  { code: "AR", name: "Argentina" },
+  { code: "AM", name: "Armenia" },
+  { code: "AW", name: "Aruba" },
+  { code: "AU", name: "Australia" },
+  { code: "AT", name: "Austria" },
+  { code: "AZ", name: "Azerbaijan" },
+  { code: "BS", name: "Bahamas" },
+  { code: "BH", name: "Bahrain" },
+  { code: "BD", name: "Bangladesh" },
+  { code: "BB", name: "Barbados" },
+  { code: "BY", name: "Belarus" },
+  { code: "BE", name: "Belgium" },
+  { code: "BZ", name: "Belize" },
+  { code: "BJ", name: "Benin" },
+  { code: "BM", name: "Bermuda" },
+  { code: "BT", name: "Bhutan" },
+  { code: "BO", name: "Bolivia" },
+  { code: "BQ", name: "Bonaire, Sint Eustatius and Saba" },
+  { code: "BA", name: "Bosnia and Herzegovina" },
+  { code: "BW", name: "Botswana" },
+  { code: "BV", name: "Bouvet Island" },
+  { code: "BR", name: "Brazil" },
+  { code: "IO", name: "British Indian Ocean Territory" },
+  { code: "BN", name: "Brunei Darussalam" },
+  { code: "BG", name: "Bulgaria" },
+  { code: "BF", name: "Burkina Faso" },
+  { code: "BI", name: "Burundi" },
+  { code: "CV", name: "Cabo Verde" },
+  { code: "KH", name: "Cambodia" },
+  { code: "CM", name: "Cameroon" },
+  { code: "CA", name: "Canada" },
+  { code: "KY", name: "Cayman Islands" },
+  { code: "CF", name: "Central African Republic" },
+  { code: "TD", name: "Chad" },
+  { code: "CL", name: "Chile" },
+  { code: "CN", name: "China" },
+  { code: "CX", name: "Christmas Island" },
+  { code: "CC", name: "Cocos (Keeling) Islands" },
+  { code: "CO", name: "Colombia" },
+  { code: "KM", name: "Comoros" },
+  { code: "CG", name: "Congo" },
+  { code: "CD", name: "Congo (Democratic Republic)" },
+  { code: "CK", name: "Cook Islands" },
+  { code: "CR", name: "Costa Rica" },
+  { code: "CI", name: "Côte d'Ivoire" },
+  { code: "HR", name: "Croatia" },
+  { code: "CU", name: "Cuba" },
+  { code: "CW", name: "Curaçao" },
+  { code: "CY", name: "Cyprus" },
+  { code: "CZ", name: "Czechia" },
+  { code: "DK", name: "Denmark" },
+  { code: "DJ", name: "Djibouti" },
+  { code: "DM", name: "Dominica" },
+  { code: "DO", name: "Dominican Republic" },
+  { code: "EC", name: "Ecuador" },
+  { code: "EG", name: "Egypt" },
+  { code: "SV", name: "El Salvador" },
+  { code: "GQ", name: "Equatorial Guinea" },
+  { code: "ER", name: "Eritrea" },
+  { code: "EE", name: "Estonia" },
+  { code: "SZ", name: "Eswatini" },
+  { code: "ET", name: "Ethiopia" },
+  { code: "FK", name: "Falkland Islands (Malvinas)" },
+  { code: "FO", name: "Faroe Islands" },
+  { code: "FJ", name: "Fiji" },
+  { code: "FI", name: "Finland" },
+  { code: "FR", name: "France" },
+  { code: "GF", name: "French Guiana" },
+  { code: "PF", name: "French Polynesia" },
+  { code: "TF", name: "French Southern Territories" },
+  { code: "GA", name: "Gabon" },
+  { code: "GM", name: "Gambia" },
+  { code: "GE", name: "Georgia" },
+  { code: "DE", name: "Germany" },
+  { code: "GH", name: "Ghana" },
+  { code: "GI", name: "Gibraltar" },
+  { code: "GR", name: "Greece" },
+  { code: "GL", name: "Greenland" },
+  { code: "GD", name: "Grenada" },
+  { code: "GP", name: "Guadeloupe" },
+  { code: "GU", name: "Guam" },
+  { code: "GT", name: "Guatemala" },
+  { code: "GG", name: "Guernsey" },
+  { code: "GN", name: "Guinea" },
+  { code: "GW", name: "Guinea-Bissau" },
+  { code: "GY", name: "Guyana" },
+  { code: "HT", name: "Haiti" },
+  { code: "HM", name: "Heard Island and McDonald Islands" },
+  { code: "VA", name: "Holy See" },
+  { code: "HN", name: "Honduras" },
+  { code: "HK", name: "Hong Kong" },
+  { code: "HU", name: "Hungary" },
+  { code: "IS", name: "Iceland" },
+  { code: "IN", name: "India" },
+  { code: "ID", name: "Indonesia" },
+  { code: "IR", name: "Iran (Islamic Republic of)" },
+  { code: "IQ", name: "Iraq" },
+  { code: "IE", name: "Ireland" },
+  { code: "IM", name: "Isle of Man" },
+  { code: "IL", name: "Israel" },
+  { code: "IT", name: "Italy" },
+  { code: "JM", name: "Jamaica" },
+  { code: "JP", name: "Japan" },
+  { code: "JE", name: "Jersey" },
+  { code: "JO", name: "Jordan" },
+  { code: "KZ", name: "Kazakhstan" },
+  { code: "KE", name: "Kenya" },
+  { code: "KI", name: "Kiribati" },
+  { code: "KP", name: "Korea (Democratic People's Republic of)" },
+  { code: "KR", name: "Korea (Republic of)" },
+  { code: "KW", name: "Kuwait" },
+  { code: "KG", name: "Kyrgyzstan" },
+  { code: "LA", name: "Lao People's Democratic Republic" },
+  { code: "LV", name: "Latvia" },
+  { code: "LB", name: "Lebanon" },
+  { code: "LS", name: "Lesotho" },
+  { code: "LR", name: "Liberia" },
+  { code: "LY", name: "Libya" },
+  { code: "LI", name: "Liechtenstein" },
+  { code: "LT", name: "Lithuania" },
+  { code: "LU", name: "Luxembourg" },
+  { code: "MO", name: "Macao" },
+  { code: "MG", name: "Madagascar" },
+  { code: "MW", name: "Malawi" },
+  { code: "MY", name: "Malaysia" },
+  { code: "MV", name: "Maldives" },
+  { code: "ML", name: "Mali" },
+  { code: "MT", name: "Malta" },
+  { code: "MH", name: "Marshall Islands" },
+  { code: "MQ", name: "Martinique" },
+  { code: "MR", name: "Mauritania" },
+  { code: "MU", name: "Mauritius" },
+  { code: "YT", name: "Mayotte" },
+  { code: "MX", name: "Mexico" },
+  { code: "FM", name: "Micronesia (Federated States of)" },
+  { code: "MD", name: "Moldova (Republic of)" },
+  { code: "MC", name: "Monaco" },
+  { code: "MN", name: "Mongolia" },
+  { code: "ME", name: "Montenegro" },
+  { code: "MS", name: "Montserrat" },
+  { code: "MA", name: "Morocco" },
+  { code: "MZ", name: "Mozambique" },
+  { code: "MM", name: "Myanmar" },
+  { code: "NA", name: "Namibia" },
+  { code: "NR", name: "Nauru" },
+  { code: "NP", name: "Nepal" },
+  { code: "NL", name: "Netherlands" },
+  { code: "NC", name: "New Caledonia" },
+  { code: "NZ", name: "New Zealand" },
+  { code: "NI", name: "Nicaragua" },
+  { code: "NE", name: "Niger" },
+  { code: "NG", name: "Nigeria" },
+  { code: "NU", name: "Niue" },
+  { code: "NF", name: "Norfolk Island" },
+  { code: "MK", name: "North Macedonia" },
+  { code: "MP", name: "Northern Mariana Islands" },
+  { code: "NO", name: "Norway" },
+  { code: "OM", name: "Oman" },
+  { code: "PK", name: "Pakistan" },
+  { code: "PW", name: "Palau" },
+  { code: "PS", name: "Palestine, State of" },
+  { code: "PA", name: "Panama" },
+  { code: "PG", name: "Papua New Guinea" },
+  { code: "PY", name: "Paraguay" },
+  { code: "PE", name: "Peru" },
+  { code: "PH", name: "Philippines" },
+  { code: "PN", name: "Pitcairn" },
+  { code: "PL", name: "Poland" },
+  { code: "PT", name: "Portugal" },
+  { code: "PR", name: "Puerto Rico" },
+  { code: "QA", name: "Qatar" },
+  { code: "RE", name: "Réunion" },
+  { code: "RO", name: "Romania" },
+  { code: "RU", name: "Russian Federation" },
+  { code: "RW", name: "Rwanda" },
+  { code: "BL", name: "Saint Barthélemy" },
+  { code: "SH", name: "Saint Helena, Ascension and Tristan da Cunha" },
+  { code: "KN", name: "Saint Kitts and Nevis" },
+  { code: "LC", name: "Saint Lucia" },
+  { code: "MF", name: "Saint Martin (French part)" },
+  { code: "PM", name: "Saint Pierre and Miquelon" },
+  { code: "VC", name: "Saint Vincent and the Grenadines" },
+  { code: "WS", name: "Samoa" },
+  { code: "SM", name: "San Marino" },
+  { code: "ST", name: "Sao Tome and Principe" },
+  { code: "SA", name: "Saudi Arabia" },
+  { code: "SN", name: "Senegal" },
+  { code: "RS", name: "Serbia" },
+  { code: "SC", name: "Seychelles" },
+  { code: "SL", name: "Sierra Leone" },
+  { code: "SG", name: "Singapore" },
+  { code: "SX", name: "Sint Maarten (Dutch part)" },
+  { code: "SK", name: "Slovakia" },
+  { code: "SI", name: "Slovenia" },
+  { code: "SB", name: "Solomon Islands" },
+  { code: "SO", name: "Somalia" },
+  { code: "ZA", name: "South Africa" },
+  { code: "GS", name: "South Georgia and the South Sandwich Islands" },
+  { code: "SS", name: "South Sudan" },
+  { code: "ES", name: "Spain" },
+  { code: "LK", name: "Sri Lanka" },
+  { code: "SD", name: "Sudan" },
+  { code: "SR", name: "Suriname" },
+  { code: "SJ", name: "Svalbard and Jan Mayen" },
+  { code: "SE", name: "Sweden" },
+  { code: "CH", name: "Switzerland" },
+  { code: "SY", name: "Syrian Arab Republic" },
+  { code: "TW", name: "Taiwan, Province of China" },
+  { code: "TJ", name: "Tajikistan" },
+  { code: "TZ", name: "Tanzania, United Republic of" },
+  { code: "TH", name: "Thailand" },
+  { code: "TL", name: "Timor-Leste" },
+  { code: "TG", name: "Togo" },
+  { code: "TK", name: "Tokelau" },
+  { code: "TO", name: "Tonga" },
+  { code: "TT", name: "Trinidad and Tobago" },
+  { code: "TN", name: "Tunisia" },
+  { code: "TR", name: "Turkey" },
+  { code: "TM", name: "Turkmenistan" },
+  { code: "TC", name: "Turks and Caicos Islands" },
+  { code: "TV", name: "Tuvalu" },
+  { code: "UG", name: "Uganda" },
+  { code: "UA", name: "Ukraine" },
+  { code: "AE", name: "United Arab Emirates" },
+  { code: "GB", name: "United Kingdom of Great Britain and Northern Ireland" },
+  { code: "UM", name: "United States Minor Outlying Islands" },
+  { code: "US", name: "United States of America" },
+  { code: "UY", name: "Uruguay" },
+  { code: "UZ", name: "Uzbekistan" },
+  { code: "VU", name: "Vanuatu" },
+  { code: "VE", name: "Venezuela (Bolivarian Republic of)" },
+  { code: "VN", name: "Viet Nam" },
+  { code: "VG", name: "Virgin Islands (British)" },
+  { code: "VI", name: "Virgin Islands (U.S.)" },
+  { code: "WF", name: "Wallis and Futuna" },
+  { code: "EH", name: "Western Sahara" },
+  { code: "YE", name: "Yemen" },
+  { code: "ZM", name: "Zambia" },
+  { code: "ZW", name: "Zimbabwe" }
+];
 
+export default function SubNav({
+  countryCode: initialCountry = "DE",
+  language = "English, USD",
+}) {
+  const [countryCode, setCountryCode] = useState(initialCountry);
+  const [openShip, setOpenShip] = useState(false);
+  const [openMenuIndex, setOpenMenuIndex] = useState(null); // index of open link submenu
+  const containerRef = useRef(null);
+  const shipRef = useRef(null);
+  const triggerShipRef = useRef(null);
 
-  // Hook to close dropdown when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-  //       setIsCountryDropdownOpen(false);
-  //     }
-  //   };
-  //   document.addEventListener("mousedown", handleClickOutside);
-  //   return () => document.removeEventListener("mousedown", handleClickOutside);
-  // }, [dropdownRef]);
+  useEffect(() => {
+    function onDocClick(e) {
+      // close ship dropdown
+      if (
+        openShip &&
+        shipRef.current &&
+        !shipRef.current.contains(e.target) &&
+        triggerShipRef.current &&
+        !triggerShipRef.current.contains(e.target)
+      ) {
+        setOpenShip(false);
+      }
+      // close any open submenu if click outside container
+      if (
+        openMenuIndex !== null &&
+        containerRef.current &&
+        !containerRef.current.contains(e.target)
+      ) {
+        setOpenMenuIndex(null);
+      }
+    }
+    function onEsc(e) {
+      if (e.key === "Escape") {
+        setOpenShip(false);
+        setOpenMenuIndex(null);
+      }
+    }
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("touchstart", onDocClick);
+    document.addEventListener("keydown", onEsc);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("touchstart", onDocClick);
+      document.removeEventListener("keydown", onEsc);
+    };
+  }, [openShip, openMenuIndex]);
 
-  // const handleCountrySelect = (country) => {
-  //   setSelectedCountry(country);
-  //   setIsCountryDropdownOpen(false);
-  // };
-  // -----------------------------------------------------
-  // END Component Logic
-  // -----------------------------------------------------
+  function handleSelectCountry(country) {
+    setCountryCode(country.code);
+    setOpenShip(false);
+  }
+
+  function toggleMenuIndex(i) {
+    setOpenMenuIndex((prev) => (prev === i ? null : i));
+  }
 
   return (
-    // The bar container: Responsive padding and layout
-    <div className='border-b border-gray-200 bg-white'>
-            <div className='max-w-7xl mx-auto flex items-center justify-between py-2 h-auto lg:h-14 px-4 sm:px-6'>
+    <nav aria-label="sub navigation" className="border-b border-gray-200 bg-white" ref={containerRef}>
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between py-2 px-4 sm:px-6">
+        {/* Left: All category */}
+        <div className="flex items-center flex-shrink-0 ">
+          <a
+            href="#"
+            className="flex items-center space-x-2 px-2 py-1 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 transition"
+          >
+            <Menu size={18} />
+            <span>All category</span>
+          </a>
+        </div>
 
-                {/* Main Link Container: Uses flex-nowrap to prevent wrapping and keeps items horizontal */}
-                <div className='flex flex-nowrap items-center text-sm font-medium text-gray-700 w-full'>
-
-                    {/* 1. All Category Link (Fixed Position - Not Scrollable) */}
-                    <a href="#" className='flex items-center space-x-2 p-2 rounded-lg hover:bg-blue-400 hover:text-white transition whitespace-nowrap flex-shrink-0'>
-                        <Menu size={20} />
-                        <span>All category</span>
-                    </a>
-
-                    {/* 2. Scrollable Links Container */}
-                    {/* Key classes: overflow-x-auto, scrollbar-hide (if you have the utility) */}
-                    <div className='flex items-center space-x-4 ml-4 lg:space-x-8 overflow-x-auto whitespace-nowrap scrollbar-hide'>
-
-                        {/* Note: I removed the "hidden lg:flex" from the container to make it visible on mobile.
-                           I also adjusted the margins (p-2 -ml-2) to be just p-2 for cleaner mobile layout. */}
-
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>Hot offers</a>
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>Gift boxes</a>
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>Projects</a>
-                        
-                        {/* Adding more links to demonstrate scrolling */}
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>Trending Items</a>
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>New Arrivals</a>
-                        <a href="#" className='p-2 rounded-lg hover:bg-blue-400 hover:text-white transition'>Clearance</a>
-                        
-                        {/* Menu Item Dropdown */}
-                        <div className='flex items-center p-2 rounded-lg group cursor-pointer hover:bg-blue-400 hover:text-white transition'>
-                            <span>Menu item</span>
-                        </div>
-
-                        {/* Help Dropdown */}
-                        <div className='flex items-center p-2 rounded-lg group cursor-pointer hover:bg-blue-400 hover:text-white transition'>
-                            <span>Help</span>
-                            <ChevronDown size={16} className='ml-1 transition-transform group-hover:rotate-180' />
-                        </div>
-                    </div>
-                </div>
-
-        {/* Right Utility Group - Moves below links on Mobile, Aligned Right on Desktop */}
-        {/* <div className='flex items-center justify-between lg:justify-end space-x-4 sm:space-x-6 text-sm text-gray-700 w-full lg:w-auto mt-2 lg:mt-0 pt-2 lg:pt-0 border-t border-gray-100 lg:border-t-0'> */}
-
-          {/* Language/Currency Dropdown */}
-          {/* <div className='flex items-center group cursor-pointer'>
-            <span className='font-semibold text-black'>English, USD</span>
-            <ChevronDown size={16} className=' ml-1 transition-transform group-hover:rotate-180' />
-          </div> */}
-
-          {/* 3. REPLACE SHIP TO DROPDOWN */}
-          {/* Ship to Dropdown (Custom Interactive Selector) */}
-          {/* <div className='relative' ref={dropdownRef}>
-            <button
-              onClick={() => setIsCountryDropdownOpen(!isCountryDropdownOpen)}
-              className='flex items-center group cursor-pointer p-1 rounded-lg hover:bg-gray-50 transition'
-              aria-expanded={isCountryDropdownOpen}
-            >
-              <span className='font-semibold text-black'>Ship to</span> */}
-              {/* Display the selected country's flag here */}
-              {/* <span className='ml-2'>
-                <ReactCountryFlag
-                  countryCode={selectedCountry.code}
-                  svg
-                  style={{ width: '1.5em', height: '1.5em', borderRadius: '4px' }}
-                  title={selectedCountry.name}
-                />
-              </span>
-              <ChevronDown
-                size={16}
-                className={`ml-1 transition-transform ${isCountryDropdownOpen ? 'rotate-180' : ''}`}
-              />
-            </button> */}
-
-            {/* Dropdown Panel (Only visible when isCountryDropdownOpen is true) */}
-            {/* {isCountryDropdownOpen && (
-              <div className='absolute right-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 z-20 overflow-y-auto max-h-60'>
-
-                <div className='py-1'>
-                  {countries.map((country) => (
-                    <button
-                      key={country.code}
-                      onClick={() => handleCountrySelect(country)}
-                      className={`flex justify-between items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition ${selectedCountry.code === country.code ? 'bg-blue-100 text-blue-800' : ''
-                        }`}
-                    > */}
-                      {/* <div className="flex items-center">
-                        <span className='text-xl mr-3'>
-                          <ReactCountryFlag
-                            countryCode={country.code}
-                            svg
-                            style={{ width: '1.5em', height: '1.5em', borderRadius: '4px' }}
-                            title={country.name}
-                          />
+        {/* Center: horizontally scrollable link row */}
+        <div className="flex-1 min-w-0 mx-4">
+          <div className="flex items-center space-x-4 overflow-x-auto whitespace-nowrap px-1 py-1 -mx-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {LINKS.map((item, i) => {
+              const hasChildren = Array.isArray(item.children) && item.children.length > 0;
+              return (
+                <div key={item.label} className="relative flex-shrink-0">
+                  {hasChildren ? (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => toggleMenuIndex(i)}
+                        aria-expanded={openMenuIndex === i}
+                        className="inline-flex items-center text-sm text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition"
+                      >
+                        <span className="mr-2">{item.label}</span>
+                        <span
+                          className={
+                            "transform transition-transform duration-200 " +
+                            (openMenuIndex === i ? "rotate-180" : "rotate-0")
+                          }
+                          aria-hidden
+                        >
+                          <ChevronDown size={14} />
                         </span>
-                        {country.name}
+                      </button>
+
+                      {/* Submenu */}
+                      {openMenuIndex === i && (
+                        <div className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-40">
+                          <div className="py-1">
+                            {item.children.map((c) => (
+                              <a
+                                key={c.label}
+                                href={c.href || "#"}
+                                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                onClick={() => setOpenMenuIndex(null)}
+                              >
+                                {c.label}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <a
+                      href="#"
+                      className="inline-block text-sm text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition"
+                    >
+                      {item.label}
+                    </a>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right utilities: visible only on desktop (lg) */}
+        <div className="flex items-center space-x-4 flex-shrink-0 mt-2 lg:mt-0">
+          {/* Language display (hidden on mobile & tablet; shown from lg and up) */}
+          <div className="hidden lg:flex items-center text-sm text-gray-700">
+            <span className="font-medium">{language}</span>
+            <ChevronDown size={14} className="ml-1" />
+          </div>
+
+          {/* Ship to (interactive dropdown) - visible only on lg and up */}
+          <div className="hidden lg:block relative" ref={shipRef}>
+            <button
+              ref={triggerShipRef}
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={openShip}
+              onClick={() => setOpenShip((v) => !v)}
+              className="flex items-center text-sm text-gray-700 px-2 py-1 rounded-md hover:bg-gray-100 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-300"
+            >
+              <span className="mr-2 font-semibold">Ship to</span>
+              <ReactCountryFlag
+                svg
+                countryCode={countryCode}
+                style={{ width: "1.25rem", height: "1.25rem", borderRadius: 4 }}
+                title={countryCode}
+              />
+              <span className="sr-only">Toggle country selector</span>
+              <span className={"ml-2 transform transition-transform duration-200 " + (openShip ? "rotate-180" : "rotate-0")}>
+                <ChevronDown size={14} />
+              </span>
+            </button>
+
+            {/* Dropdown */}
+            {openShip && (
+              <div
+                role="menu"
+                aria-label="Choose shipping country"
+                className="absolute right-0 mt-2 w-72 max-w-screen-sm bg-white border border-gray-200 rounded-md shadow-lg z-50"
+              >
+                <div className="max-h-72 overflow-y-auto">
+                  {COUNTRIES.map((c) => (
+                    <button
+                      key={c.code}
+                      type="button"
+                      role="menuitem"
+                      onClick={() => handleSelectCountry(c)}
+                      className="w-full flex items-center px-3 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
+                    >
+                      <ReactCountryFlag
+                        svg
+                        countryCode={c.code}
+                        style={{ width: "1rem", height: "1rem", borderRadius: 3 }}
+                        title={c.name}
+                        className="mr-3"
+                      />
+                      <div className="flex-1">
+                        <div className="font-medium text-sm">{c.name}</div>
                       </div>
-                      {selectedCountry.code === country.code && (
-                        <span className='text-sm font-semibold text-blue-600'>Selected</span>
+                      {c.code === countryCode && (
+                        <span className="text-xs text-indigo-600 font-semibold">Selected</span>
                       )}
                     </button>
-                  ))} */}
-                {/* </div> */}
-              {/* </div> */}
-            {/* )} */}
-          {/* </div> */}
-        {/* </div> */}
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 }
-
-export default SubNav;
+// ...existing code...

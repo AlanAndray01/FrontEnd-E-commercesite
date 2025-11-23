@@ -7,17 +7,17 @@ function RecommendedProducts({ products = [] }) {
   }
 
   return (
-    <div className="bg-white py-4">
-      <div className="px-4">
+    <div className="xl:hidden bg-teal-50 py-4">
+      <div className="px-4 ">
         {/* Section Title */}
         <h2 className="text-lg font-bold text-gray-900 mb-2">You may also like</h2>
         
         {/* Scrollable Product Grid */}
-        <div className="flex overflow-x-auto space-x-4 p-2 pb-2 scrollbar-hide">
+        <div className="flex overflow-x-auto space-x-4 p-2 pb-2  scrollbar-hide">
           {products.map((product) => (
             <div 
               key={product.id} 
-              className="flex-shrink-0 p-3 w-36 cursor-pointer hover:shadow-lg transition-shadow"
+              className="flex-shrink-0 p-3 bg-white ronded-lg w-36 cursor-pointer hover:shadow-lg transition-shadow"
             >
               {/* Product Image */}
               <div className="bg-gray-100 rounded-lg mb-2 overflow-hidden">
@@ -44,7 +44,6 @@ function RecommendedProducts({ products = [] }) {
           ))}
         </div>
       </div>
-
       <style jsx>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;

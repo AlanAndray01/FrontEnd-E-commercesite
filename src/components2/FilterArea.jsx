@@ -1,7 +1,15 @@
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { SlidersHorizontal, X, Filter, Grid2x2, Menu } from 'lucide-react';
 
-function FilterArea({ sortBy, onSortChange, activeFilters, onFilterRemove, }) {
+function FilterArea({ 
+  sortBy, 
+  onSortChange, 
+  activeFilters, 
+  onFilterRemove,
+  viewMode,
+  onViewModeChange 
+}) {
   const handleSortClick = () => {
     if (sortBy === 'Newest') onSortChange('Price Low');
     else if (sortBy === 'Price Low') onSortChange('Price High');
@@ -9,7 +17,8 @@ function FilterArea({ sortBy, onSortChange, activeFilters, onFilterRemove, }) {
   };
 
   return (
-    <div className="bg-white">
+    // Hide on desktop (lg and up), show on mobile/tablet
+    <div className="lg:hidden bg-white">
       {/* Filter Bar */}
       <div className="border-b px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
@@ -27,12 +36,23 @@ function FilterArea({ sortBy, onSortChange, activeFilters, onFilterRemove, }) {
           </button>
         </div>
 
-        <div className="flex items-center border border-gray-100 rounded-lg">
-          <button className="p-1.5 rounded-l-lg hover:bg-gray-50">
-            <Grid2x2 size={20} className="text-gray-400" />
+        {/* View Toggle Buttons */}
+        <div className="flex items-center border border-gray-200 rounded-lg">
+          <button 
+            onClick={() => onViewModeChange('grid')}
+            className={`p-1.5 rounded-l-lg hover:bg-gray-50 ${
+              viewMode === 'grid' ? 'bg-blue-50 text-black' : 'text-gray-400'
+            }`}
+          >
+            <Grid2x2 size={20} />
           </button>
-          <button className="p-1.5 rounded-r-lg hover:bg-gray-50">
-            <Menu size={20} className="text-gray-400" />
+          <button 
+            onClick={() => onViewModeChange('list')}
+            className={`p-1.5 rounded-r-lg hover:bg-gray-50 ${
+              viewMode === 'list' ? 'bg-blue-50 text-black' : 'text-gray-400'
+            }`}
+          >
+            <Menu size={20} />
           </button>
         </div>
       </div>

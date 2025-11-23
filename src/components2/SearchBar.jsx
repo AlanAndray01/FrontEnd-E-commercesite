@@ -11,7 +11,8 @@ function SearchBar({ searchQuery, onSearchChange, selectedCategory, onCategoryCh
   };
 
   return (
-    <header className="bg-white border-b sticky top-0 z-10">
+    // Hide on desktop (lg and up), show on mobile/tablet
+    <header className="lg:hidden bg-white border-b sticky top-0 z-10">
       {/* Top Bar */}
       <div className="flex items-center justify-between p-4">
         <div className="flex items-center space-x-4">

@@ -1,0 +1,114 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import logo from "/src/assets/Layout/Brand/logo-colored.png"
+import Sidebar from './Sidebar';
+import {
+  ShoppingBag,
+  Search,
+  User,
+  MessageSquare,
+  Heart,
+  ShoppingCart,
+  Menu,
+} from 'lucide-react';
+
+function MainNavbar() {
+  const navigate = useNavigate();
+  const cartItemCount = null;
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleSearchClick = () => {
+    navigate('/search');
+  };
+
+  const handleCartClick = () => {
+    navigate('/cart');
+  };
+
+  return (
+    <>
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      {/* Hide navbar completely on mobile/tablet, show only on desktop */}
+      <nav className='hidden lg:block bg-white shadow-md py-1 border border-gray-200'>
+        <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 '>
+          
+          {/* Desktop View - Only this section will show */}
+          <div className='flex mt-2 items-start justify-start'>
+            {/* Left Section: Logo */}
+            <div className='flex items-center space-x-2'>
+              <a href="#" className="flex items-center space-x-2">
+                <img src={logo} alt="Brand Logo" className="h-10 w-30" />
+              </a>
+            </div>
+
+            {/* Center Section: Search Bar Group */}
+            <div className='flex-grow flex justify-center mx-8'>
+              <div className='flex items-center border-2 border-blue-400 rounded-lg overflow-hidden w-full max-w-xl'>
+                <input
+                  onClick={handleSearchClick}
+                  className='focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 p-2 text-sm flex-grow cursor-pointer'
+                  placeholder='Search'
+                  type="search"
+                  readOnly
+                />
+                <select
+                  className='cursor-pointer focus:outline-none h-full px-3 text-md text-gray-600 border-l border-blue-400 bg-white'
+                  id="category"
+                  name="category"
+                >
+                  <option value="all">All category</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="shoes">Shoes</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="accessories">Accessories</option>
+                  <option value="electronics">Electronics</option>
+                </select>
+                <button
+                  onClick={handleSearchClick}
+                  className='bg-blue-500 text-white h-full px-4 text-sm font-medium flex items-center justify-center'
+                  type="button"
+                  aria-label="Search"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+
+            {/* Right Section: Utility Icons and Labels */}
+            <div className='flex items-center space-x-6 text-sm text-gray-500'>
+              <a href="/account" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="Account Profile">
+                <User size={20} />
+                <span className="mt-1">Profile</span>
+              </a>
+              <a href="/messages" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="Messages">
+                <MessageSquare size={20} />
+                <span className="mt-1">Message</span>
+              </a>
+              <a href="/orders" className='flex flex-col items-center hover:text-blue-600 transition' aria-label="My Orders">
+                <Heart size={20} />
+                <span className="mt-1">Orders</span>
+              </a>
+              <button 
+                onClick={handleCartClick}
+                className='relative flex flex-col items-center hover:text-blue-600 transition' 
+                aria-label="Shopping Cart"
+              >
+                <ShoppingCart size={20} />
+                <span className="mt-1">My cart</span>
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-1 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
+                    {cartItemCount}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </nav>
+    </>
+  );
+}
+
+export default MainNavbar;

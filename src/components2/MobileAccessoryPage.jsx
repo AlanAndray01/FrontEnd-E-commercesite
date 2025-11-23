@@ -1,15 +1,21 @@
+ 
 import React, { useState, useMemo } from 'react';
 import { products, recommendedProducts } from './mockData';
 import SearchBar from './SearchBar';
 import FilterArea from './FilterArea';
 import ProductList from './ProductList';
 import RecommendedProducts from './RecommendedProducts';
+import MainNavbar from './Navbar';
+import SubNav from './Subnav';
+import Newsletter from './Newsletter';
+import Footer from './Footer';
 
 const MobileAccessoryPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [activeFilters, setActiveFilters] = useState([]);
   const [sortBy, setSortBy] = useState('Newest');
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'grid'
 
   const hasSearched = searchQuery.trim() !== '' || selectedCategory !== 'all' || activeFilters.length > 0;
 
@@ -49,6 +55,8 @@ const MobileAccessoryPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <MainNavbar />
+      <SubNav />
       <SearchBar 
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
@@ -60,13 +68,18 @@ const MobileAccessoryPage = () => {
         onSortChange={setSortBy}
         activeFilters={activeFilters}
         onFilterRemove={(id) => setActiveFilters(activeFilters.filter(f => f.id !== id))}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
       />
       <ProductList 
         products={filteredProducts}
         hasSearched={hasSearched}
+        viewMode={viewMode}
       />
       {/* Add this component */}
       <RecommendedProducts products={recommendedProducts} />
+      <Newsletter />
+      <Footer />
     </div>
   );
 }

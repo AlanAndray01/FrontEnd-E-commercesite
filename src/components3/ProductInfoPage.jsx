@@ -13,7 +13,7 @@ import SubNav from './Subnav';
 import DesktopProductInfo from './DesktopProductInfo';
 import Discount from './Discount';
 import Footer from './Footer'
-import Breadcrumb from './BreadCrumb';
+import Breadcrumb from './Breadcrumb';
 
 
 // Main Product Detail Page Component

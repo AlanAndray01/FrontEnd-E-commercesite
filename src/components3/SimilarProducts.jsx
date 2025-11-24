@@ -7,17 +7,18 @@ function SimilarProducts({ products = [] }) {
 //   }
 
   return (
-    <div className="bg-white  py-4">
-      <div className="px-4 ">
+    <div className="bg-teal-50 lg:px-14 py-4">
+      <div className="lg:mx-3 lg:p-2 lg:rounded-lg px-4 lg:bg-white sm:bg-teal-50 md:bg-teal-50">
         {/* Section Title */}
-        <h2 className="text-lg font-bold text-gray-900 mb-2">Similar Products</h2>
+        <h2 className="text-lg font-bold text-gray-900 mb-2 lg:hidden">Similar Products</h2>
+        <h2 className="hidden lg:block text-lg font-bold text-gray-900 mb-2">Related products</h2>
         
-        {/* Scrollable Product Grid */}
+        {/* Scrollable Product Grid - Same for both mobile and desktop */}
         <div className="flex overflow-x-auto space-x-4 p-2 pb-2 scrollbar-hide">
           {products.map((product) => (
             <div 
               key={product.id} 
-              className="flex-shrink-0 p-3 w-36 border rounded-lg cursor-pointer hover:shadow-lg transition-shadow"
+              className="flex-shrink-0 bg-white p-3 w-36 border rounded-lg cursor-pointer hover:shadow-lg transition-shadow"
             >
               {/* Product Image */}
               <div className="bg-gray-100 rounded-lg mb-2 overflow-hidden">
@@ -28,8 +29,8 @@ function SimilarProducts({ products = [] }) {
                 />
               </div>
               
-              {/* Product Info */}
-              <div>
+              {/* Product Info - Mobile Layout (price first) */}
+              <div className="lg:hidden">
                 {/* Price */}
                 <p className="text-base font-bold text-gray-900 mb-1">
                   ${product.price.toFixed(2)}
@@ -38,6 +39,19 @@ function SimilarProducts({ products = [] }) {
                 {/* Product Name */}
                 <p className="text-xs text-gray-600 line-clamp-2">
                   {product.name}
+                </p>
+              </div>
+
+              {/* Product Info - Desktop Layout (title first, then price) */}
+              <div className="hidden lg:block">
+                {/* Product Name */}
+                <p className="text-xs text-gray-600 line-clamp-2 mb-1">
+                  {product.name}
+                </p>
+                
+                {/* Price */}
+                <p className="text-base font-bold text-gray-900">
+                  ${product.price.toFixed(2)}
                 </p>
               </div>
             </div>

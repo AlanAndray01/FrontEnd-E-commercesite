@@ -6,19 +6,16 @@ const Header = () => {
     const navigate = useNavigate()
 
     const handleCartClick = () => {
-    navigate('/cart');
-  };
+        navigate('/cart');
+    };
     
     const handleBackClick = () => {
-        // Go back to previous page or home if no history
-        navigate(-1) // This goes back to previous page
-        // OR use this to always go to home:
-        // navigate('/')
+        navigate(-1)
     }
 
     return (
         <>
-            <div className="bg-white px-4 py-3 flex items-center justify-between shadow-sm">
+            <div className="bg-white px-4 py-3 flex items-center justify-between shadow-sm lg:hidden">
                 <button 
                     className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                     onClick={handleBackClick}
@@ -28,9 +25,9 @@ const Header = () => {
                 </button>
                 <div className="flex items-center gap-4">
                     <button 
-            onClick={handleCartClick}
-            className="p-2 hover:bg-gray-100 rounded-full transition"
-          >
+                        onClick={handleCartClick}
+                        className="p-2 hover:bg-gray-100 rounded-full transition"
+                    >
                         <ShoppingCart className="w-5 h-5" />
                     </button>
                     <button 

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Star, ChevronUp, Grid2x2, Menu, Heart } from 'lucide-react'
 import { products as mockProducts } from './mockData'
 
@@ -105,12 +106,15 @@ function Sidebar() {
   )
 }
 
-function ProductRow({ p }) {
+function ProductRow({ p, onProductClick }) {
   const numeric = Number(p.rating) || 0
   const filled = Math.round((numeric / 10) * 5)
 
   return (
-    <div className="relative bg-white border border-gray-200 rounded mb-4 p-4 flex gap-6 items-start">
+    <div 
+      className="relative bg-white border border-gray-200 rounded mb-4 p-4 flex gap-6 items-start cursor-pointer hover:shadow-lg transition-shadow"
+      onClick={() => onProductClick(p.id)}
+    >
       <img src={p.image} alt={p.name} className="w-44 h-44 object-cover rounded" />
 
       <div className="flex-1 pr-12">
@@ -143,22 +147,30 @@ function ProductRow({ p }) {
         <p className="mt-3 text-gray-700 text-sm">{p.description}</p>
 
         <div className="mt-4">
-          <a className="text-sm text-blue-600" href="#">View details</a>
+          <span className="text-sm text-blue-600 cursor-pointer">View details</span>
         </div>
       </div>
 
       {/* wishlist heart top-right */}
-      <button className="absolute top-4 right-4 w-10 h-10 rounded-md border border-gray-200 bg-white flex items-center justify-center text-blue-500 hover:text-red-500 transition-colors">
+      <button 
+        className="absolute top-4 right-4 w-10 h-10 rounded-md border border-gray-200 bg-white flex items-center justify-center text-blue-500 hover:text-red-500 transition-colors"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <Heart className="w-5 h-5" />
       </button>
     </div>
   )
 }
 
-function ProductCard({ p }) {
+function ProductCard({ p, onProductClick }) {
   const filled = Math.round((Number(p.rating) || 0) / 10 * 5)
   return (
-    <article className="border rounded p-4 bg-white flex flex-col h-full shadow-sm">
+    <article 
+      className="border rounded p-4 bg-white flex flex-col h-full shadow-sm cursor-pointer hover:shadow-lg transition-shadow"
+      onClick={() => onProductClick(p.id)}
+    >
       <div className="mb-3">
         <div className="bg-white rounded overflow-hidden flex items-center justify-center ">
           <img src={p.image} alt={p.name} className="w-full max-h-40 max-w-30" />
@@ -170,7 +182,13 @@ function ProductCard({ p }) {
           <div className="flex items-start justify-between mb-2">
             <div className="text-lg font-bold text-gray-900">${p.price.toFixed(2)}{p.oldPrice && <span className="text-sm line-through text-gray-400 ml-2">${p.oldPrice}</span>}</div>
 
-            <button aria-label="Add to wishlist" className="w-11 h-11 rounded-md border border-gray-200 flex items-center justify-center text-blue-500 bg-white hover:text-red-500 transition-colors">
+            <button 
+              aria-label="Add to wishlist" 
+              className="w-11 h-11 rounded-md border border-gray-200 flex items-center justify-center text-blue-500 bg-white hover:text-red-500 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
               <Heart className="w-5 h-5" />
             </button>
           </div>
@@ -193,6 +211,7 @@ function ProductCard({ p }) {
 }
 
 const DesktopProductList = () => {
+  const navigate = useNavigate()
   const [page, setPage] = useState(1)
   const [perPage, setPerPage] = useState(10)
   const [view, setView] = useState('grid') // 'grid' | 'list'
@@ -206,6 +225,10 @@ const DesktopProductList = () => {
   }, [page, perPage])
 
   const goTo = (p) => setPage(Math.max(1, Math.min(totalPages, p)))
+
+  const handleProductClick = (productId) => {
+    navigate(`/product/${productId}`)
+  }
 
   return (
     <div className="hidden lg:block max-w-8xl bg-teal-50 px-16 py-6">
@@ -255,13 +278,13 @@ const DesktopProductList = () => {
             {view === 'list' ? (
               <div>
                 {currentProducts.map((p) => (
-                  <ProductRow key={p.id} p={p} />
+                  <ProductRow key={p.id} p={p} onProductClick={handleProductClick} />
                 ))}
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-6">
                 {currentProducts.map((p) => (
-                  <ProductCard key={p.id} p={p} />
+                  <ProductCard key={p.id} p={p} onProductClick={handleProductClick} />
                 ))}
               </div>
             )}

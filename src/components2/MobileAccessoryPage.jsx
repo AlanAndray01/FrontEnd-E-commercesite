@@ -9,6 +9,7 @@ import MainNavbar from './Navbar';
 import SubNav from './Subnav';
 import Newsletter from './Newsletter';
 import Footer from './Footer';
+import Breadcrumb from './Breadcrumb';
 
 const MobileAccessoryPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,6 +72,7 @@ const MobileAccessoryPage = () => {
         viewMode={viewMode}
         onViewModeChange={setViewMode}
       />
+      <Breadcrumb />
       <ProductList 
         products={filteredProducts}
         hasSearched={hasSearched}

@@ -14,7 +14,7 @@ function ProductInfo() {
   const quantity = '50-100 pcs'
 
   return (
-    <div className="bg-white p-3 shadow-sm border border-gray-200">
+    <div className="bg-white p-3 shadow-sm border border-gray-200 lg:hidden">
       {/* Rating and Stats */}
       <div className="flex items-center space-x-2 mb-4">
         <div className="flex gap-0.5">

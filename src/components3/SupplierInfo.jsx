@@ -7,7 +7,7 @@ const SupplierInfo = () => {
     //   const [isWishlisted, setIsWishlisted] = useState(false)
 
     return (
-        <div className="w-full max-w-sm border border-gray-200 rounded-lg p-4 bg-white">
+        <div className="lg:hidden w-full max-w-sm border border-gray-200 rounded-lg p-4 bg-white">
             {/* Top section with supplier info */}
             <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
                 <div className="flex items-center gap-3">

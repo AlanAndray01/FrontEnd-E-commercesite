@@ -76,7 +76,7 @@ export default function SavedForLater() {
     };
 
     return (
-        <div className="w-full max-w-lg mx-auto bg-green-100 p-2 border border-gray-200 shadow-sm">
+        <div className="lg:hidden w-full mx-auto bg-green-100 p-2 border border-gray-200 shadow-sm">
             <h2 className="text-xl font-bold bg-green-100 text-gray-900 mb-4 px-1">Saved for later</h2>
             
             <div className=" bg-green-100 space-y-2">
@@ -120,4 +120,4 @@ export default function SavedForLater() {
             </div>
         </div>
     );
-}                                               
+}

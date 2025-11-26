@@ -51,8 +51,8 @@ function MobileProductList({ products = [], hasSearched = false, viewMode = 'lis
   if (viewMode === 'grid') {
     return (
       <div className="lg:hidden bg-teal-50 p-4">
-        {/* Responsive grid: 2 columns on mobile, 3 columns on tablet */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {/* Responsive grid: 2 columns on mobile, 4 columns on tablet */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {products.map((product) => (
             <div 
               key={product.id} 

@@ -167,11 +167,11 @@ function PromoDeals() {
 
           {/* Right: products in columns with vertical dividers */}
           <div className="bg-white border border-gray-100 ">
-            <div className="grid grid-cols-5 divide-x divide-gray-200">
+            <div className="grid grid-cols-5 divide-x divide-gray-200 ">
               {products.map((product,) => (
-                <div key={product.id} className="flex flex-col items-center justify-center py-6 px-6">
-                  <div className="w-32 h-32 flex items-center justify-center">
-                    <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain" />
+                <div key={product.id} className="flex flex-col items-center justify-center md:px-0 py-6 px-6">
+                  <div className="w-32 h-32 md:w-24 md:h-24 flex items-center justify-center">
+                    <img src={product.image} alt={product.name} className="max-w-full max-h-full rounded-lg object-contain" />
                   </div>
                   <h3 className="mt-4 text-sm font-medium text-gray-900">{product.name}</h3>
                   <span className="mt-2 inline-block bg-red-100 text-red-600 text-sm font-semibold px-3 py-1 rounded-full">

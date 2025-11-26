@@ -8,7 +8,7 @@ function Sidebar() {
     <aside className="w-72 p-2">
       <div className="space-y-6 sticky top-20">
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Category</h4>
             <ChevronUp />
           </div>
@@ -22,7 +22,7 @@ function Sidebar() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Brands</h4>
             <ChevronUp />
           </div>
@@ -38,7 +38,7 @@ function Sidebar() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Features</h4>
             <ChevronUp />
           </div>
@@ -54,7 +54,7 @@ function Sidebar() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Price Range</h4>
             <ChevronUp />
           </div>
@@ -69,7 +69,7 @@ function Sidebar() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Condition</h4>
             <ChevronUp />
           </div>
@@ -84,7 +84,7 @@ function Sidebar() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between border-t border-gray-200">
             <h4 className="font-semibold mb-3">Ratings</h4>
             <ChevronUp />
           </div>
@@ -282,7 +282,7 @@ const DesktopProductList = () => {
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-6">
+              <div className="grid grid-cols-4 gap-6">
                 {currentProducts.map((p) => (
                   <ProductCard key={p.id} p={p} onProductClick={handleProductClick} />
                 ))}

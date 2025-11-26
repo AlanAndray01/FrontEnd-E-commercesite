@@ -6,15 +6,15 @@ function Shopcart() {
   const navigate = useNavigate();
 
   const handleBack = () => {
-  if (window.history.state && window.history.state.idx > 0) {
-    navigate(-1); // Go back if there's history
-  } else {
-    navigate('/'); // Otherwise go to home
-  }
-};
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1); // Go back if there's history
+    } else {
+      navigate('/'); // Otherwise go to home
+    }
+  };
 
   return (
-    <div className="w-full bg-white border-b border-gray-200">
+    <div className="w-full bg-white border-b border-gray-200 lg:hidden">
       <div className="flex items-center px-4 py-4">
         <button 
           onClick={handleBack}
@@ -30,4 +30,5 @@ function Shopcart() {
     </div>
   );
 }
-export default Shopcart
+
+export default Shopcart;
